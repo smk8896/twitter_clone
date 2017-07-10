@@ -54,7 +54,7 @@ class TweetsController < ApplicationController
       if @tweet.destroy
       format.html { redirect_to tweets_url, notice: 'Tweet deleted successfully'}
       else
-        format.html [ render :index, notice: 'Something went wrong, your tweet still exists. Good luck with everything in life. I love you...']
+        format.html { render :index, notice: 'Something went wrong, your tweet still exists. Good luck with everything in life. I love you...'}
       end
     end
   end
