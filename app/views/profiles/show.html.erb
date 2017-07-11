@@ -1,3 +1,5 @@
+<p id="notice"><%= notice %></p>
+
 <!-- Username -->
 <h1><%= @user.username %>'s Profile</h1>
 
@@ -6,4 +8,14 @@
   <%= tweet.message %> <br>
 <% end %>
 
-<%= link_to "Follow", relationships_path(friend_id: @user.id), method: :post %>
+
+<!-- only show this stuff if it's not the current user's profile -->
+<% unless current_user.id == @user.id %>
+  <% if current_user.friends.include?(@user) #We're already following %>
+  <!-- unfollow button -->
+  <%= link_to "Unfollow", relationship_path(current_user.relationships.find_by_friend_id(@user)), method: :delete %>
+  <% else %>
+
+  <%= link_to "Follow", relationships_path(friend_id: @user.id), method: :post %>
+  <% end %>
+<% end %>
